@@ -2,10 +2,10 @@ require('dotenv/config');
 
 module.exports = {
   type: 'mysql',
-  host: process.env.DB_HOST || '127.0.0.1',
-  username: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'nodejs-sample',
+  host: process.env.DB_HOST || 'localhost',
+  username: process.env.DB_USER || 'bibliotech',
+  password: process.env.DB_PASSWORD || 'bibliotech',
+  database: process.env.DB_NAME || 'bibliotech_db',
   port: process.env.DB_PORT || 3306,
   charset: 'utf8',
   driver: 'mysql',
