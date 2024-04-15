@@ -2,6 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn, Unique, OneToMany } from 'typeo
 
 // Entities
 import { BaseEntity } from '../base/base.entity';
+import { Collection } from '../collection/collection.entity';
 
 @Entity('user', { orderBy: { id: 'DESC' } })
 export class User extends BaseEntity {
@@ -24,6 +25,9 @@ export class User extends BaseEntity {
 
   @Column({ default: false })
   isDeleted: boolean;
+
+  @OneToMany(() => Collection, collection => collection.user)
+  collections: Collection[];
 
   toJSON() {
     delete this.isDeleted;
