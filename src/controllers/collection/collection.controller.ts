@@ -3,35 +3,33 @@ import httpStatusCodes from 'http-status-codes';
 // Interfaces
 import IController from '../../interfaces/IController';
 import {
-  ICreateUser,
-  ILoginUser,
-  IUpdateUser,
-  IUserQueryParams,
-} from '../../interfaces/user.interface';
+  ICreateCollection
+} from '../../interfaces/collection.interface';
 import { IDeleteById, IDetailById } from '../../interfaces/common.interface';
 
 // // Errors
 // import { StringError } from '../../errors/string.error';
 
-// // Services
-// import userService from '../../services/user/user.service';
+// Services
+import collectionService from '../../services/collection/collection.service';
 
-// // Utilities
-// import ApiResponse from '../../utilities/api-response.utility';
+// Utilities
+import ApiResponse from '../../utilities/api-response.utility';
 // import Encryption from '../../utilities/encryption.utility';
 // import ApiUtility from '../../utilities/api.utility';
 
-// // Constants
-// import constants from '../../constants';
+// Constants
+import constants from '../../constants';
 
 const create: IController = async (req, res) => {
+  // FIX: O usuário deve ser capaz de alterar apenas o seu userId
   try {
     const params: ICreateCollection = {
       title: req.body.title,
       description: req.body.description,
       userId: req.body.userId,
     }
-    const user = await userService.create(params);
+    const user = await collectionService.create(params);
     return ApiResponse.result(res, user, httpStatusCodes.CREATED);
   } catch (e) {
     if (e.code === constants.ERROR_CODE.DUPLICATED) {

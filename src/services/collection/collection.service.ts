@@ -24,7 +24,6 @@ const create = async (params: ICreateCollection) => {
   item.title = params.title;
   item.description = params.description;
   item.userId = params.userId;
-  item.lastName = params.lastName;
   const collectionData = await getRepository(Collection).save(item);
   return collectionData;
 };

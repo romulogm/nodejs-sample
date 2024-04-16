@@ -17,8 +17,8 @@ export class Collection{
   @Column()
   description: string;
 
-  @ManyToOne(() => User, user => user.collections) 
-  user: User;
+  @Column()  
+  userId: number;
 
   @OneToMany(() => Book, book => book.collection)
   books: Book[];

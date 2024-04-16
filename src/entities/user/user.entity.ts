@@ -26,7 +26,7 @@ export class User extends BaseEntity {
   @Column({ default: false })
   isDeleted: boolean;
 
-  @OneToMany(() => Collection, collection => collection.user)
+  @OneToMany(() => Collection, collection => collection.userId)
   collections: Collection[];
 
   toJSON() {
