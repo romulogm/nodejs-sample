@@ -14,14 +14,11 @@ import {
   IUpdateCollection,
   IDeleteCollection,
   IListCollection
-
 } from '../../interfaces/collection.interface';
 //import { IDeleteById, IDetailById } from '../../interfaces/common.interface';
 
 // Errors
 //import { StringError } from '../../errors/string.error';
-
-const where = { isDeleted: false };
 
 const create = async (params: ICreateCollection) => {
   const item = new Collection();
@@ -60,26 +57,21 @@ const list = async (params: IListCollection) => {
 };
 
 
-// const list: IController = async (req, res) => {
-//   try {
-//     const limit = ApiUtility.getQueryParam(req, 'limit');
-//     const page = ApiUtility.getQueryParam(req, 'page');
-//     const keyword = ApiUtility.getQueryParam(req, 'keyword');
-//     const params: IUserQueryParams = { limit, page, keyword };
-//     const data = await userService.list(params);
-//     return ApiResponse.result(res, data.response, httpStatusCodes.OK, null, data.pagination);
-//   } catch (e) {
-//     ApiResponse.exception(res, e);
-//   }
-// };
+const remove = async (params: IDeleteCollection) => {
+  const existingCollection = await getRepository(Collection).findOne(params.id);
 
+  if (!existingCollection) {
+    throw new Error('Coleção não encontrada.');
+  }
+
+  const deletionResult = await getRepository(Collection).delete(params.id);
+
+  return deletionResult;
+}
 
 export default {
   create,
-  // login,
-  // getById,
-  // detail,
   update,
-  list
-  // remove,
+  list,
+  remove
 }

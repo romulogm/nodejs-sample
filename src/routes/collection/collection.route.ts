@@ -24,11 +24,11 @@ router.put(
   collectionController.update,
 );
 
-// router.delete(
-//   '/collection',
-//   //schemaValidator(userSchema.login),
-//   collectionController.delete,
-// );
+router.delete(
+  '/',
+  //schemaValidator(userSchema.login),
+  collectionController.remove,
+);
 
 router.get(
   '/',

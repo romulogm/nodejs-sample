@@ -5,7 +5,8 @@ import IController from '../../interfaces/IController';
 import {
   ICreateCollection,
   IUpdateCollection,
-  IListCollection
+  IListCollection,
+  IDeleteCollection
 } from '../../interfaces/collection.interface';
 //import { IDeleteById, IDetailById } from '../../interfaces/common.interface';
 
@@ -68,13 +69,22 @@ const list: IController = async (req, res) => {
   }
 };
 
+const remove: IController = async (req, res) => {
+  try {
+    const params: IDeleteCollection = {
+      id: req.body.id,
+    }
+    await collectionService.remove(params);
+    return ApiResponse.result(res, params, httpStatusCodes.OK);
+  } catch (e) {
+    ApiResponse.exception(res, e);
+  }
+};
+
+
 export default {
   create,
   list,
-  // me,
-  // detail,
-  update
-  // updateMe,
-  // list,
-  // remove,
+  update,
+  remove
 };

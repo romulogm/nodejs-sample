@@ -20,6 +20,9 @@ export class Collection{
   @Column()  
   userId: number;
 
+  // @ManyToOne(() => User, user => user.collections) 
+  // user: User; 
+  
   @OneToMany(() => Book, book => book.collection)
   books: Book[];
 }
