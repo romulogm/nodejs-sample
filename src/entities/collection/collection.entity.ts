@@ -1,7 +1,7 @@
 
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from 'typeorm';
 //Entities
-import { User } from '../user/user.entity';
+//import { User } from '../user/user.entity';
 import { Book } from '../book/book.entity';
 
 

@@ -1,6 +1,5 @@
 // Interfaces
-import { IBaseQueryParams } from './common.interface';
-
+//import { IBaseQueryParams } from './common.interface';
 
 export interface ICreateCollection {
   title: string;
@@ -9,17 +8,16 @@ export interface ICreateCollection {
   //books: Book[];
 }
 
-// export interface ILoginUser {
-//   email: string;
-//   password: string;
-// }
+export interface IUpdateCollection {
+  title: string;
+  description: string;
+  id: number; 
+}
 
-// export interface IUpdateUser {
-//   id: number;
-//   firstName: string;
-//   lastName: string;
-// }
+export interface IDeleteCollection {
+  id: number; 
+}
 
-// export interface IUserQueryParams extends IBaseQueryParams {
-//   keyword?: string;
-// }
+export interface IListCollection {
+  userId: number; 
+}

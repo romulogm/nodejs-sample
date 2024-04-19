@@ -13,19 +13,27 @@ import collectionController from '../../controllers/collection/collection.contro
 const router = express.Router();
 
 router.post(
-  '/collection',
+  '/',
   //schemaValidator(userSchema.login),
   collectionController.create,
 );
 
-// router.put(
-//   '/:id',
-//   collectionController.edit,
-// );
+router.put(
+  '/',
+  //schemaValidator(userSchema.login),
+  collectionController.update,
+);
 
 // router.delete(
-//   '/:id',
-//   collectionController.remove,
+//   '/collection',
+//   //schemaValidator(userSchema.login),
+//   collectionController.delete,
 // );
+
+router.get(
+  '/',
+  //schemaValidator(userSchema.login),
+  collectionController.list,
+);
 
 export default router;
