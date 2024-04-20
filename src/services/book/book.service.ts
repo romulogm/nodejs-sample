@@ -2,6 +2,7 @@ import { getRepository } from 'typeorm';
 
 // Entities
 import { Book } from '../../entities/book/book.entity';
+import { Collection } from '../../entities/collection/collection.entity';
 
 // Utilities
 // import Encryption from '../../utilities/encryption.utility';
@@ -9,8 +10,10 @@ import { Book } from '../../entities/book/book.entity';
 // import DateTimeUtility from '../../utilities/date-time.utility';
 
 // Interfaces
+
 import {
-  ICreateBook
+  ICreateBook,
+  IListBook
   // IUpdateBook,
   // IDeleteBook,
   // IListBook
@@ -35,6 +38,25 @@ const create = async (params: ICreateBook) => {
   
   const bookData = await getRepository(Book).save(item);
   return bookData;
+};
+
+const list = async (params: IListBook) => {
+  const collectionRepo = getRepository(Collection).createQueryBuilder('collection');
+
+  collectionRepo.where('collection.userId = :userId', { userId: params.userId });
+
+  const collections = await collectionRepo.getMany();
+
+ 
+  const collectionIds = collections.map(x => x.id);
+
+  const books = await getRepository(Book)
+  .createQueryBuilder('book')
+  .innerJoin('book.collection', 'collection')
+  .where('collection.id IN (:...collectionIds)', { collectionIds })
+  .getMany();
+
+  return books;
 };
 
 
@@ -78,8 +100,8 @@ const create = async (params: ICreateBook) => {
 // }
 
 export default {
-  create
+  create,
   // update,
-  // list,
+  list
   // remove
 }

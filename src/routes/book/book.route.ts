@@ -30,10 +30,10 @@ router.post(
 //   collectionController.remove,
 // );
 
-// router.get(
-//   '/',
-//   //schemaValidator(userSchema.login),
-//   collectionController.list,
-// );
+router.get(
+  '/',
+  //schemaValidator(userSchema.login),
+  bookController.list,
+);
 
 export default router;

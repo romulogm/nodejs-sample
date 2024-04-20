@@ -3,7 +3,8 @@ import httpStatusCodes from 'http-status-codes';
 // Interfaces
 import IController from '../../interfaces/IController';
 import {
-  ICreateBook
+  ICreateBook,
+  IListBook
 } from '../../interfaces/book.interface';
 //import { IDeleteById, IDetailById } from '../../interfaces/common.interface';
 
@@ -42,6 +43,17 @@ const create: IController = async (req, res) => {
   }
 };
 
+const list: IController = async (req, res) => {
+  try {
+    const params: IListBook = {
+      userId: req.body.userId,
+    }
+    const list = await bookService.list(params);
+    return ApiResponse.result(res, list, httpStatusCodes.OK);
+  } catch (e) {
+    ApiResponse.exception(res, e);
+  }
+};
 
 // const update: IController = async (req, res) => {
 //   try {
@@ -83,8 +95,8 @@ const create: IController = async (req, res) => {
 
 
 export default {
-  create
-  // list,
+  create,
+  list
   // update,
   // remove
 };
